@@ -1,4 +1,4 @@
-import { Auth, Typography, Button } from "@supabase/ui";
+import { Auth } from "@supabase/ui";
 import { supabase } from "../../utils/supabaseClient";
 import { Container, Heading } from "@chakra-ui/react";
 
