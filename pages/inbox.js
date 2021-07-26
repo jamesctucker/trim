@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Input, UnorderedList, ListItem } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 import { Typography } from "@supabase/ui";
 import { supabase } from "../utils/supabaseClient";
+import TodoList from "../components/todos/TodoList";
 
 export default function Inbox() {
   const user = supabase.auth.user();
@@ -18,6 +19,7 @@ export default function Inbox() {
     let { data: todos, error } = await supabase
       .from("todos")
       .select("*")
+      .filter("is_complete", "eq", false)
       .order("id", true);
     if (error) console.log("error", error);
     else setTodos(todos);
@@ -31,14 +33,15 @@ export default function Inbox() {
         .from("todos")
         .insert({ task, user_id: user.id })
         .single();
-      if (error) setError(error.message);
-      else setTodos([...todos, todo]);
+      if (error) {
+        setError(error.message);
+      } else {
+        setTodos([...todos, todo]);
+      }
+      setTodo("");
     }
   };
 
-  const todoList = todos.map((todo) => (
-    <ListItem key={`t + ${todo.id}`}>{todo.task}</ListItem>
-  ));
   return (
     <div>
       <h1>Inbox</h1>
@@ -52,7 +55,7 @@ export default function Inbox() {
         }}
       />
       {errorText && <Text>{errorText}</Text>}
-      <UnorderedList>{todoList}</UnorderedList>
+      <TodoList todos={todos} />
     </div>
   );
 }
