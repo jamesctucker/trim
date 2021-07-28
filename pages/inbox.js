@@ -3,42 +3,23 @@ import { Input } from "@chakra-ui/react";
 import { Typography } from "@supabase/ui";
 import { supabase } from "../utils/supabaseClient";
 import TodoList from "../components/todos/TodoList";
+import { useStore } from "../store/store";
 
 export default function Inbox() {
-  const user = supabase.auth.user();
   const { Text } = Typography;
-  const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState([]);
-  const [errorText, setError] = useState("");
+  const todos = useStore((state) => state.todos);
+  const getTodos = useStore((state) => state.getTodos);
+  const addTodo = useStore((state) => state.addTodo);
+  const errorMsg = useStore((state) => state.errorMsg);
 
   useEffect(() => {
-    fetchTodos();
-  }, []);
+    getTodos();
+  }, [getTodos]);
 
-  const fetchTodos = async () => {
-    let { data: todos, error } = await supabase
-      .from("todos")
-      .select("*")
-      .filter("is_complete", "eq", false)
-      .order("id", true);
-    if (error) console.log("error", error);
-    else setTodos(todos);
-  };
-
-  const submitTodo = async (e) => {
-    let task = e.target.value.trim();
-    if (e.keyCode === 13 && task.length > 0) {
-      e.preventDefault();
-      let { data: todo, error } = await supabase
-        .from("todos")
-        .insert({ task, user_id: user.id })
-        .single();
-      if (error) {
-        setError(error.message);
-      } else {
-        setTodos([...todos, todo]);
-      }
-      setTodo("");
+  const handleTodo = (e) => {
+    let todo = e.target.value.trim();
+    if (e.keyCode === 13 && todo.length > 0) {
+      addTodo(todo);
     }
   };
 
@@ -48,13 +29,13 @@ export default function Inbox() {
       <Input
         placeholder="Add a task"
         onChange={(e) => {
-          setTodo(e.target.value);
+          handleTodo(e);
         }}
         onKeyDown={(e) => {
-          submitTodo(e);
+          handleTodo(e);
         }}
       />
-      {errorText && <Text>{errorText}</Text>}
+      {errorMsg && <Text>{errorMsg}</Text>}
       <TodoList todos={todos} />
     </div>
   );
