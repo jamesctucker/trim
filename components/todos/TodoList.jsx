@@ -1,7 +1,7 @@
-import Todo from "./Todo.jsx";
+import { Todo } from "./index.js";
 import { UnorderedList } from "@chakra-ui/react";
 
-export default function TodoList({ todos }) {
+export function TodoList({ todos }) {
   return (
     <div>
       <UnorderedList>

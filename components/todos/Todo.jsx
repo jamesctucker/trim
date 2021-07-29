@@ -2,7 +2,7 @@ import { ListItem, Flex } from "@chakra-ui/react";
 import { Check } from "react-feather";
 import { supabase } from "../../utils/supabaseClient";
 
-export default function Todo({ todo }) {
+export function Todo({ todo }) {
   const completeTodo = async () => {
     console.log("completing");
     try {
