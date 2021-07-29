@@ -1,5 +1,16 @@
 import { useEffect, useState } from "react";
-import { Typography, Button } from "@supabase/ui";
+import { Button } from "@supabase/ui";
+import {
+  Avatar,
+  Flex,
+  Menu,
+  MenuItem,
+  MenuButton,
+  MenuList,
+  MenuGroup,
+  MenuDivider,
+  Text,
+} from "@chakra-ui/react";
 import { supabase } from "../../utils/supabaseClient";
 
 export default function Nav() {
@@ -20,12 +31,31 @@ export default function Nav() {
   return (
     <div>
       {session && (
-        <>
-          <Typography.Text>Signed in: {user.email}</Typography.Text>
-          <Button block onClick={signOut}>
-            Sign out
-          </Button>
-        </>
+        <nav>
+          <Flex justify="flex-end">
+            <Menu placement="bottom">
+              <MenuButton>
+                <Avatar bg="teal.500" />
+              </MenuButton>
+              <MenuList>
+                <Text fontSize="sm" color="gray.500" isTruncated>
+                  Signed in: {user.email}
+                </Text>
+                <MenuGroup title="Profile">
+                  <MenuItem>My Account</MenuItem>
+                  <MenuItem>Settings</MenuItem>
+                </MenuGroup>
+                <MenuDivider />
+                <MenuGroup title="Help">
+                  <MenuItem>FAQ</MenuItem>
+                </MenuGroup>
+                <Button block onClick={signOut}>
+                  Sign out
+                </Button>
+              </MenuList>
+            </Menu>
+          </Flex>
+        </nav>
       )}
     </div>
   );

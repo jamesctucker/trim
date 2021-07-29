@@ -1,14 +1,13 @@
-import Nav from "../components/nav/Nav";
 import "../styles/globals.css";
 import { ChakraProvider, Flex } from "@chakra-ui/react";
-import Sidebar from "../components/nav/Sidebar";
+import Layout from "../components/layout";
 
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider>
-      <Nav />
-      <Sidebar />
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ChakraProvider>
   );
 }
