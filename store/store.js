@@ -30,6 +30,17 @@ const createTodoSlice = (set) => ({
     }
     set((state) => ({ todos: [...state.todos, data] }));
   },
+  completeTodo: async (todo) => {
+    const { data, error } = await supabase
+      .from("todos")
+      .update({ is_complete: true })
+      .eq("id", todo.id)
+      .single();
+    if (error) {
+      set({ errorMsg: error.message });
+      return;
+    }
+  },
 });
 
 export const useStore = create(

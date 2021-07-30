@@ -1,32 +1,31 @@
-import { ListItem, Flex } from "@chakra-ui/react";
-import { Check } from "react-feather";
-import { supabase } from "../../utils/supabaseClient";
+import { ListItem, Flex, Checkbox, Text } from "@chakra-ui/react";
+import { useStore } from "../../store/store";
 
 export function Todo({ todo }) {
-  const completeTodo = async () => {
-    console.log("completing");
-    try {
-      const { data, error } = await supabase
-        .from("todos")
-        .update({ is_complete: true })
-        .eq("id", todo.id)
-        .single();
-      if (error) {
-        throw new Error(error);
-      }
-    } catch (error) {
-      console.log("error", error);
+  const completeTodo = useStore((state) => state.completeTodo);
+  const getTodos = useStore((state) => state.getTodos);
+  const errorMsg = useStore((state) => state.errorMsg);
+
+  const handleCheck = (e) => {
+    if (e.target.checked) {
+      completeTodo(todo).then(() => getTodos());
     }
   };
 
   return (
-    <div>
-      <Flex direction="row">
-        <ListItem>{todo.task}</ListItem>
-        <button onClick={(e) => completeTodo()}>
-          <Check />
-        </button>
-      </Flex>
-    </div>
+    <>
+      <ListItem>
+        <Flex direction="row" m={2}>
+          <Checkbox
+            onChange={(e) => {
+              handleCheck(e);
+            }}
+            mr={2}
+          />
+          <Text fontSize="md">{todo.task}</Text>
+          {errorMsg && <p>{errorMsg}</p>}
+        </Flex>
+      </ListItem>
+    </>
   );
 }
