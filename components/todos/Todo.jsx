@@ -8,7 +8,9 @@ export function Todo({ todo }) {
 
   const handleCheck = (e) => {
     if (e.target.checked) {
-      completeTodo(todo).then(() => getTodos());
+      setTimeout(() => {
+        completeTodo(todo).then(() => getTodos());
+      }, 400);
     }
   };
 

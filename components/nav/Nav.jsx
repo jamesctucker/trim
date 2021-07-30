@@ -29,34 +29,32 @@ export default function Nav() {
     supabase.auth.signOut();
   };
   return (
-    <div>
+    <>
       {session && (
-        <nav>
-          <Flex justify="flex-end" p={2}>
-            <Menu placement="bottom">
-              <MenuButton>
-                <Avatar bg="teal.500" />
-              </MenuButton>
-              <MenuList p={4}>
-                <Text fontSize="sm" color="gray.500" isTruncated>
-                  Signed in: {user.email}
-                </Text>
-                <MenuGroup title="Profile">
-                  <MenuItem>My Account</MenuItem>
-                  <MenuItem>Settings</MenuItem>
-                </MenuGroup>
-                <MenuDivider />
-                <MenuGroup title="Help">
-                  <MenuItem>FAQ</MenuItem>
-                </MenuGroup>
-                <Button block onClick={signOut}>
-                  Sign out
-                </Button>
-              </MenuList>
-            </Menu>
-          </Flex>
-        </nav>
+        <Flex justify="flex-end" p={2}>
+          <Menu placement="bottom">
+            <MenuButton>
+              <Avatar bg="teal.500" />
+            </MenuButton>
+            <MenuList p={4}>
+              <Text fontSize="sm" color="gray.500" isTruncated>
+                Signed in: {user.email}
+              </Text>
+              <MenuGroup title="Profile">
+                <MenuItem>My Account</MenuItem>
+                <MenuItem>Settings</MenuItem>
+              </MenuGroup>
+              <MenuDivider />
+              <MenuGroup title="Help">
+                <MenuItem>FAQ</MenuItem>
+              </MenuGroup>
+              <Button block onClick={signOut}>
+                Sign out
+              </Button>
+            </MenuList>
+          </Menu>
+        </Flex>
       )}
-    </div>
+    </>
   );
 }
