@@ -1,14 +1,14 @@
 import { Todo } from "./index.js";
-import { UnorderedList } from "@chakra-ui/react";
+import { List } from "@chakra-ui/react";
 
 export function TodoList({ todos }) {
   return (
     <div>
-      <UnorderedList>
+      <List>
         {todos.map((todo) => (
           <Todo key={`t + ${todo.id}`} todo={todo} />
         ))}
-      </UnorderedList>
+      </List>
     </div>
   );
 }

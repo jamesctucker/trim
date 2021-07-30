@@ -1,4 +1,4 @@
-import { Input } from "@chakra-ui/react";
+import { Input, Box } from "@chakra-ui/react";
 import { Typography } from "@supabase/ui";
 import { useStore } from "../../store/store";
 
@@ -15,9 +15,9 @@ export function TodoInput() {
   };
 
   return (
-    <div>
+    <Box mb={4}>
       <Input
-        placeholder="Add a task"
+        placeholder="Add a new task"
         onChange={(e) => {
           handleTodo(e);
         }}
@@ -26,6 +26,6 @@ export function TodoInput() {
         }}
       />
       {errorMsg && <Text>{errorMsg}</Text>}
-    </div>
+    </Box>
   );
 }

@@ -10,14 +10,28 @@ export default function Layout({ children }) {
         templateRows=".25fr repeat(3, 1fr)"
         templateColumns=".5fr repeat(2, 1fr)"
         gap={0}
+        minHeight="100vh"
       >
-        <GridItem rowSpan={4} colSpan={1} bg="white">
+        <GridItem
+          rowSpan={4}
+          colSpan={1}
+          bg="white"
+          borderRight="1px"
+          borderColor="gray.200"
+          p={2}
+        >
           <Sidebar />
         </GridItem>
-        <GridItem rowSpan={1} colSpan={2} bg="white">
+        <GridItem
+          rowSpan={1}
+          colSpan={2}
+          bg="white"
+          borderBottom="1px"
+          borderColor="gray.200"
+        >
           <Nav />
         </GridItem>
-        <GridItem rowSpan={3} colSpan={2} bg="white">
+        <GridItem rowSpan={3} colSpan={2} bg="white" p={6}>
           <main>{children}</main>
         </GridItem>
       </Grid>

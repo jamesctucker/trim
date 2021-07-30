@@ -32,12 +32,12 @@ export default function Nav() {
     <div>
       {session && (
         <nav>
-          <Flex justify="flex-end">
+          <Flex justify="flex-end" p={2}>
             <Menu placement="bottom">
               <MenuButton>
                 <Avatar bg="teal.500" />
               </MenuButton>
-              <MenuList>
+              <MenuList p={4}>
                 <Text fontSize="sm" color="gray.500" isTruncated>
                   Signed in: {user.email}
                 </Text>
