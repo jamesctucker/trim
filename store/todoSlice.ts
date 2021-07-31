@@ -1,6 +1,7 @@
 import { GetState, SetState } from "zustand";
 import { supabase } from "../utils/supabaseClient";
 import { MyState } from "./useStore";
+import { Todo } from "../lib/interfaces";
 
 const user = supabase.auth.user();
 
@@ -8,15 +9,6 @@ export interface TodoSlice {
   todos: Todo[];
   errorMsg: string | null;
   getTodos: () => void;
-}
-
-interface Todo {
-  id?: number;
-  user_id?: string;
-  task: string;
-  description?: string;
-  is_complete?: boolean;
-  inserted_at?: string;
 }
 
 const createTodoSlice = (set: SetState<MyState>, get: GetState<MyState>) => ({
