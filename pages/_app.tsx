@@ -1,8 +1,9 @@
 import "../styles/globals.css";
-import { ChakraProvider, Flex } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import Layout from "../components/layout";
+import type { AppProps } from "next/app";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <Layout>

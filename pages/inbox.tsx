@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { TodoList, TodoInput } from "../components/todos/index";
 import useStore from "../store/useStore";
+import { Todo } from "../lib/interfaces";
 
 export default function Inbox() {
-  const todos = useStore((state) => state.todos);
+  const todos: Todo[] = useStore((state) => state.todos);
   const getTodos = useStore((state) => state.getTodos);
 
   useEffect(() => {
