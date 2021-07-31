@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { Typography } from "@supabase/ui";
 import { TodoList, TodoInput } from "../components/todos/index";
-import { useStore } from "../store/store";
+import useStore from "../store/useStore";
 
 export default function Inbox() {
   const todos = useStore((state) => state.todos);

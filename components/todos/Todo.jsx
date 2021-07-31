@@ -1,5 +1,5 @@
 import { ListItem, Flex, Checkbox, Text } from "@chakra-ui/react";
-import { useStore } from "../../store/store";
+import useStore from "../../store/useStore";
 
 export function Todo({ todo }) {
   const completeTodo = useStore((state) => state.completeTodo);
