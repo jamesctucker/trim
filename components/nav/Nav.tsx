@@ -14,8 +14,9 @@ import {
 import { supabase } from "../../utils/supabaseClient";
 
 export default function Nav() {
-  const user = supabase.auth.user();
-  const [session, setSession] = useState(null);
+  // TODO: create auth user interface
+  const user: any = supabase.auth.user();
+  const [session, setSession] = useState<object | null>(null);
 
   useEffect(() => {
     setSession(supabase.auth.session());

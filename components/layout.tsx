@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
-1;
+import React, { useEffect, useState } from "react";
 import Nav from "./nav/Nav";
 import Sidebar from "./nav/Sidebar";
-// import Footer from "./footer/Footer";
 import { Grid, GridItem, Flex } from "@chakra-ui/react";
-import Authentication from "../components/auth/Authentication";
+import Authentication from "./auth/Authentication";
 import { supabase } from "../utils/supabaseClient";
 
-export default function Layout({ children }) {
-  const [session, setSession] = useState(null);
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export default function Layout({ children }: LayoutProps) {
+  const [session, setSession] = useState<object | null>(null);
 
   useEffect(() => {
     setSession(supabase.auth.session());

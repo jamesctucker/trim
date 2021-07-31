@@ -9,6 +9,8 @@ export interface TodoSlice {
   todos: Todo[];
   errorMsg: string | null;
   getTodos: () => void;
+  addTodo: (todo: Todo) => void;
+  completeTodo: (todo: Todo) => Promise<void>;
 }
 
 const createTodoSlice = (set: SetState<MyState>, get: GetState<MyState>) => ({

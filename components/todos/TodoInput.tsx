@@ -10,7 +10,8 @@ export function TodoInput() {
   const [task, setTask] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleTask = (e) => {
+  // TODO: figure out how to type a React keydown event
+  const handleTask = (e: any) => {
     let todo = e.target.value;
     setTask(todo);
     if (e.keyCode === 13 && todo.length > 0) {
