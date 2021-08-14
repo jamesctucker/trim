@@ -5,12 +5,8 @@ import { Grid, GridItem, Flex } from "@chakra-ui/react";
 import Authentication from "./auth/Authentication";
 import { supabase } from "../utils/supabaseClient";
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-export default function Layout({ children }: LayoutProps) {
-  const [session, setSession] = useState<object | null>(null);
+export default function Layout({ children }) {
+  const [session, setSession] = useState(null);
 
   useEffect(() => {
     setSession(supabase.auth.session());

@@ -1,17 +1,12 @@
 import { ListItem, Flex, Checkbox, Text } from "@chakra-ui/react";
 import useStore from "../../store/useStore";
-import { Todo as TodoInterface } from "../../lib/interfaces";
 
-interface Props {
-  todo: TodoInterface;
-}
-
-export function Todo({ todo }: Props) {
+export function Todo({ todo }) {
   const completeTodo = useStore((state) => state.completeTodo);
   const getTodos = useStore((state) => state.getTodos);
   const errorMsg = useStore((state) => state.errorMsg);
 
-  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheck = (e) => {
     if (e.target.checked) {
       setTimeout(() => {
         completeTodo(todo).then(() => getTodos());
