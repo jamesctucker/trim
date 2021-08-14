@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useCreateTodo from "../../hooks/useCreateTodo";
-import { Input, Box } from "@chakra-ui/react";
+import { Input, Box, Text } from "@chakra-ui/react";
 
 export function TodoInput() {
   const [task, setTask] = useState("");
@@ -9,7 +9,6 @@ export function TodoInput() {
     todo: { task: task, description: description },
   });
 
-  // TODO: figure out how to type a React keydown event
   const handleTask = (e) => {
     let todo = e.target.value;
     setTask(todo);
@@ -32,7 +31,10 @@ export function TodoInput() {
         }}
         value={task}
       />
-      {/* {errorMsg && <Text>{errorMsg}</Text>} */}
+
+      {createTodoMutation.isError && (
+        <Text>{createTodoMutation.error.message}</Text>
+      )}
     </Box>
   );
 }

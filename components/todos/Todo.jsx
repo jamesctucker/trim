@@ -1,15 +1,12 @@
 import { ListItem, Flex, Checkbox, Text } from "@chakra-ui/react";
-import useStore from "../../store/useStore";
+import useCompleteTodo from "../../hooks/useCompleteTodo";
 
 export function Todo({ todo }) {
-  const completeTodo = useStore((state) => state.completeTodo);
-  const getTodos = useStore((state) => state.getTodos);
-  const errorMsg = useStore((state) => state.errorMsg);
-
+  const completeTodoMutation = useCompleteTodo({ todo });
   const handleCheck = (e) => {
     if (e.target.checked) {
       setTimeout(() => {
-        completeTodo(todo).then(() => getTodos());
+        completeTodoMutation.mutate();
       }, 400);
     }
   };
@@ -25,7 +22,7 @@ export function Todo({ todo }) {
             mr={2}
           />
           <Text fontSize="md">{todo.task}</Text>
-          {errorMsg && <p>{errorMsg}</p>}
+          {/* {errorMsg && <p>{errorMsg}</p>} */}
         </Flex>
       </ListItem>
     </>

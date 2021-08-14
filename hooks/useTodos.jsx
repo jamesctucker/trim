@@ -6,7 +6,7 @@ const getTodos = async () => {
     .from("todos")
     .select("*")
     .filter("is_complete", "eq", false)
-    .order("id", { ascending: false });
+    .order("id", { ascending: true });
   if (error) {
     throw new Error(error.message);
   }
