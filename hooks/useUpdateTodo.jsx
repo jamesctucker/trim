@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "react-query";
 import { supabase } from "../utils/supabaseClient";
 
-const createTodo = async (todo) => {
-  const user = supabase.auth.user();
+const updateTodo = async (todo) => {
   const { data, error } = await supabase
     .from("todos")
-    .insert({ title: todo.title, note: todo.note, user_id: user.id })
+    .update({ title: todo.title, note: todo.note })
+    .eq("id", todo.id)
     .single();
   if (error) {
     throw new Error(error.message);
@@ -19,12 +19,12 @@ const createTodo = async (todo) => {
 };
 
 // TODO: set-up optimistic updates and error rollbacks
-export default function useCreateTodo({ todo }) {
+export default function useUpdateTodo({ todo }) {
   const queryClient = useQueryClient();
 
-  return useMutation("createTodo", () => createTodo(todo), {
+  return useMutation("updateTodo", () => updateTodo(todo), {
     onSuccess: (data) => {
-      queryClient.setQueryData("todos", (old) => [...old, data]);
+      queryClient.setQueryData(["todos", { id: data.id }], data);
     },
   });
 }

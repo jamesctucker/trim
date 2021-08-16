@@ -3,33 +3,33 @@ import useCreateTodo from "../../hooks/useCreateTodo";
 import { Input, Box, Text } from "@chakra-ui/react";
 
 export function TodoInput() {
-  const [task, setTask] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
+  const [note, setNote] = useState("");
   const createTodoMutation = useCreateTodo({
-    todo: { task: task, description: description },
+    todo: { title: title, note: note },
   });
 
-  const handleTask = (e) => {
+  const handleTitle = (e) => {
     let todo = e.target.value;
-    setTask(todo);
+    setTitle(todo);
     if (e.keyCode === 13 && todo.length > 0) {
       todo.trim();
       createTodoMutation.mutate();
-      setTask("");
+      setTitle("");
     }
   };
 
   return (
     <Box mb={4}>
       <Input
-        placeholder="Add a new task"
+        placeholder="Add a new title"
         onChange={(e) => {
-          handleTask(e);
+          handleTitle(e);
         }}
         onKeyDown={(e) => {
-          handleTask(e);
+          handleTitle(e);
         }}
-        value={task}
+        value={title}
       />
 
       {createTodoMutation.isError && (
